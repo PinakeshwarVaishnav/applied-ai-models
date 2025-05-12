@@ -27,8 +27,17 @@ X = X.fillna(X.mean())
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,random_state=42, stratify=y)
 
+# Reshape y_train and y_test using .ravel()
+y_train = y_train.values.ravel()
+y_test = y_test.values.ravel()
+
 # Create a pipeline for scaling and the Naïve Bayes model
 pipeline = Pipeline([
     ('scalar', StandardScaler()),
     ('model', GaussianNB())
 ])
+
+# Step 4: Train the Naïve Bayes Model
+
+# Train the model
+pipeline.fit(X_train, y_train)
