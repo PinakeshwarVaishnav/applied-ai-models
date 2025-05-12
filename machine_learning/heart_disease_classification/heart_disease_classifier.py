@@ -38,6 +38,8 @@ pipeline = Pipeline([
 ])
 
 # Step 4: Train the Naïve Bayes Model
-
-# Train the model
 pipeline.fit(X_train, y_train)
+
+# Step 5: Make Predictions on the Test Set
+y_pred = pipeline.predict(X_test)
+y_prob = pipeline.predict_proba(X_test)[:, 1] # Probability of the positive class
