@@ -42,4 +42,20 @@ pipeline.fit(X_train, y_train)
 
 # Step 5: Make Predictions on the Test Set
 y_pred = pipeline.predict(X_test)
-y_prob = pipeline.predict_proba(X_test)[:, 1] # Probability of the positive class
+y_prob = pipeline.predict_proba(X_test) # Probability of the positive class
+
+# Step 6: Evaluate the Model
+
+# Calculate the AUC score
+
+# Calculate the AUC score using 'ovo' (One-vs-One) strategy
+auc_ovo = roc_auc_score(y_test, y_prob, multi_class='ovo')
+print(f'test AUC (one-vs-one): {auc_ovo:.4f}')
+
+# Calculate the AUC score using 'ovr' (One-vs-Rest) strategy
+auc_ovr  = roc_auc_score(y_test, y_prob, multi_class='ovr')
+print(f'test AUC (one-vs-rest): {auc_ovr:.4f}')
+
+# Print the classification report
+print('\nClassification Report:')
+print(classification_report(y_test, y_pred))
